@@ -16,7 +16,7 @@ depends=(
   'wlroots' 'thorium'
 
   # others
-  'libressl' 'linux-firmware' 'licenses'
+  'libressl' 'linux-firmware' 'licenses' 'libudev-zero' 'mdev-like-a-boss'
 )
 
 # vim: ts=2 sw=2 et:
