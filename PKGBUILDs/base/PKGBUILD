@@ -1,0 +1,22 @@
+pkgname=base
+pkgver=1
+pkgrel=1
+pkgdesc='A set of packages to define a basic installation of the Browser-Based OS'
+url='https://github.com/neizhmak/browser-based-os'
+arch=('any')
+license=('GPL')
+depends=(
+  # foundation
+  'filesystem' 'cachyos-linux-bore' 'musl' 'gcc-libs' 'mdeved' 'dinit' 'dinit-services'
+
+  # tools
+  'toybox' 'sdhcp' 'wpa_supplicant' 'bluez' 'alsa'
+
+  # workspace
+  'wlroots' 'thorium'
+
+  # others
+  'libressl' 'linux-firmware' 'licenses'
+)
+
+# vim: ts=2 sw=2 et:
