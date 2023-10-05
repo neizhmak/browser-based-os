@@ -38,11 +38,13 @@ build_task:
   cross_compiler_script:
     - su - lfs
     - cd /mnt/jhalfs
-    - sed -i '134,140d' jhalfs
-    - sed -i '255,261d' jhalfs
-    - sed -i '34,39d' optimize/optimize_functions
+    - sed 's/read/#/g' jhalfs
+    - sed 's/read/#/g' optimize/optimize_functions
+#    - sed -i '134,140d' jhalfs
+#    - sed -i '255,261d' jhalfs
+#    - sed -i '34,39d' optimize/optimize_functions
     - ./jhalfs run
     - cd ../
-    - tar -cf jhalfs
+    - tar -cf jhalfs.tar jhalfs
   lfs_commands_artifacts:
     path: "/mnt/jhalfs.tar"
