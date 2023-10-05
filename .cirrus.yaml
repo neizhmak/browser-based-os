@@ -10,9 +10,10 @@ build_task:
   preparation_script:
     - ls
     - apt update -y
+    - apt upgrade -y
     - apt install -y bash binutils bison coreutils diffutils findutils
         gawk gcc grep gzip m4 make patch perl python-is-python3 sed tar 
-        texinfo xz wget sudo libxml2 libxslt docbook docbook-xsl-ns
+        texinfo xz-utils wget sudo libxml2 libxslt1.1 docbook docbook-xsl-ns
     - adduser lfs --disabled-password
     - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - mkdir -pv $LFS/{sources,etc,var,lib64,tools} $LFS/usr/{bin,lib,sbin}
