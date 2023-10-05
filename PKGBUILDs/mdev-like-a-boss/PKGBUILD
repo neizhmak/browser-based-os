@@ -7,7 +7,7 @@ source=("https://github.com/slashbeast/$pkgname/archive/refs/tags/$pkgver.tar.gz
 arch=(x86_64 arm aarch64)
 license=(Apache)
 makedepends=(make)
-sha256sums=('0bd89b657d62d019598e6c7ed726ff8fed80e8ba092a83b484d66afb80b77da5')
+sha256sums=('5c6c015099cdfb7f9340b8ae23a845faebc1a7ff92cf20e53c2f916be9298e43')
 
 package() {
   cd "$srcdir/$pkgver"
