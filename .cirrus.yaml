@@ -39,7 +39,7 @@ build_task:
   cross_compiler_script:
     - su - lfs
     - cd $LFS/jhalfs
-    - sed -i '135,139d' jhalfs
+    - sed -i '134,140d' jhalfs
     - ./jhalfs run
     - yes
     - cd ../
