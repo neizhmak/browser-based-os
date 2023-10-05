@@ -34,15 +34,14 @@ build_task:
         PATH=$LFS/tools/bin:$PATH \n
         CONFIG_SITE=$LFS/usr/share/config.site \n
         export LFS LC_ALL LFS_TGT PATH CONFIG_SITE \n"
-    - git clone https://git.linuxfromscratch.org/jhalfs.git $LFS/jhalfs
-    - cp -rf configuration $LFS/jhalfs/
+    - git clone https://git.linuxfromscratch.org/jhalfs.git /mnt/jhalfs
+    - cp -rf configuration /mnt/jhalfs/
   cross_compiler_script:
     - su - lfs
-    - cd $LFS/jhalfs
+    - cd /mnt/jhalfs
     - sed -i '134,140d' jhalfs
     - ./jhalfs run
-    - yes
     - cd ../
     - tar -cf jhalfs
   lfs_commands_artifacts:
-    path: "$LFS/jhalfs.tar"
+    path: "/mnt/jhalfs.tar"
