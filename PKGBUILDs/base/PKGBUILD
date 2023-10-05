@@ -10,7 +10,7 @@ depends=(
   'bbo-filesystem' 'cachyos-linux-bore' 'musl' 'mdeved' 'dinit'
 
   # tools
-  'bbo-busybox' 'dhcpcd' 'wpa_supplicant' 'bluez' 'alsa'
+  'busybox' 'dhcpcd' 'wpa_supplicant' 'bluez' 'alsa'
 
   # workspace
   'bbo-dwl' 'thorium'
