@@ -13,7 +13,7 @@ depends=(
   'busybox' 'dhcpcd' 'wpa_supplicant' 'bluez' 'alsa'
 
   # workspace
-  'bbo-dwl' 'thorium'
+  'dwl' 'thorium'
 
   # others
   'libressl' 'linux-firmware' 'licenses' 'libudev-zero' 'mdev-like-a-boss'
