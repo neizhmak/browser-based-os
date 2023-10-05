@@ -37,7 +37,7 @@ build_task:
     - git clone https://git.linuxfromscratch.org/jhalfs.git $LFS/jhalfs
     - cp -rf configuration $LFS/jhalfs/
   cross_compiler_script:
-    - su - user
+    - su - lfs
     - source ~/.bash_profile
     - cd $LFS/jhalfs
     - ./jhalfs run
