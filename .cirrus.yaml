@@ -10,7 +10,7 @@ build_task:
   preparation_script:
     - apt update -y
     - apt upgrade -y
-    - apt install -y bash binutils bison coreutils diffutils findutils
+    - apt install -y bash binutils bison coreutils diffutils findutils git
         gawk gcc grep gzip m4 make patch perl python-is-python3 sed tar 
         texinfo xz-utils wget sudo libxml2 libxslt1.1 docbook docbook-xsl-ns
     - adduser lfs --disabled-password
