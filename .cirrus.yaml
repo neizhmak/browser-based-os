@@ -4,16 +4,14 @@ container:
   memory: 1G
 env:
   LFS: /mnt/lfs
-  MAKEFLAGS: '-j1'
-  LANG: "C"
 
 build_task:
   preparation_script:
     - apt update -y
     - apt upgrade -y
-    - apt install -y bash binutils bison coreutils diffutils findutils git docbook-xml docbook-xsl
-        gawk gcc grep gzip m4 make patch perl python-is-python3 sed tar libxml2-utils
-        texinfo xz-utils wget sudo libxml2 libxslt1.1 docbook docbook-xsl-ns xsltproc
+    - apt install -y bison git docbook-xml docbook-xsl g++ xsltproc
+        gawk gcc m4 make patch perl python-is-python3 libxml2-utils
+        texinfo xz-utils wget sudo libxml2 libxslt1.1 docbook docbook-xsl-ns
     - adduser lfs --disabled-password
     - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - mkdir -pv $LFS/{sources,etc,var,lib64,tools} $LFS/usr/{bin,lib,sbin}
@@ -34,7 +32,7 @@ build_task:
         if [ ! -L /bin ]; then PATH=/bin:$PATH; fi \n
         PATH=$LFS/tools/bin:$PATH \n
         CONFIG_SITE=$LFS/usr/share/config.site \n
-        export LFS LC_ALL LFS_TGT PATH CONFIG_SITE \n"
+        export LFS LC_ALL LFS_TGT PATH CONFIG_SITE \n" >> ~/.bashrc
     - git clone https://git.linuxfromscratch.org/jhalfs.git /mnt/jhalfs
     - cp -rf configuration /mnt/jhalfs/
   cross_compiler_script:
