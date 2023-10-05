@@ -1,0 +1,53 @@
+container:
+  image: debian:stable-slim
+  cpu: 1
+  memory: 1G
+env:
+  LFS: /mnt/lfs
+  MAKEFLAGS: '-j1'
+
+build_task:
+  preparation_script:
+    - ls
+    - apt update -y
+    - apt install -y bash binutils bison coreutils diffutils findutils
+    gawk gcc grep gzip m4 make patch perl python sed tar 
+    texinfo xz wget sudo libxml2 libxslt docbook docbook-xsl-ns
+    - adduser lfs --disabled-password
+    - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+    - mkdir -pv $LFS/{sources,etc,var,lib64,tools} $LFS/usr/{bin,lib,sbin}
+    - ln -sv $LFS/usr/bin $LFS/bin
+    - ln -sv $LFS/usr/sbin $LFS/sbin
+    - ln -sv $LFS/usr/lib $LFS/lib
+    - chown -v lfs $LFS/{usr{,/*},lib,lib64,var,etc,bin,sbin,tools}
+    - chmod -v a+wt $LFS/sources
+    - su - lfs
+    - ls
+    - cat > ~/.bash_profile << "EOF"
+        exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
+      EOF
+    - cat > ~/.bashrc << "EOF"
+        set +h
+        umask 022
+        LFS=/mnt/lfs
+        LC_ALL=POSIX
+        LFS_TGT=$(uname -m)-lfs-linux-gnu
+        PATH=/usr/bin
+        if [ ! -L /bin ]; then PATH=/bin:$PATH; fi
+        PATH=$LFS/tools/bin:$PATH
+        CONFIG_SITE=$LFS/usr/share/config.site
+        export LFS LC_ALL LFS_TGT PATH CONFIG_SITE
+      EOF
+    - git clone https://git.linuxfromscratch.org/jhalfs.git $LFS/jhalfs
+    - git clone https://github.com/neizhmak/browser-based-os.git -b test2
+    - cp -rf ./browser-based-os/configuration $LFS/jhalfs/
+  cross_compiler_script:
+    - su - user
+    - source ~/.bash_profile
+    - cd $LFS/jhalfs
+    - ./jhalfs run
+    - yes
+    - cd ../
+    - tar -cf jhalfs
+  lfs_commands_artifacts:
+    path: "$LFS/jhalfs.tar"
