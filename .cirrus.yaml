@@ -38,7 +38,6 @@ build_task:
     - cp -rf configuration $LFS/jhalfs/
   cross_compiler_script:
     - su - lfs
-    - source ~/.bash_profile
     - cd $LFS/jhalfs
     - ./jhalfs run
     - yes
