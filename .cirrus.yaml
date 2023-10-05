@@ -41,7 +41,7 @@ build_task:
     - su - lfs
     - cd /mnt/jhalfs
     - sed -i '134,140d' jhalfs
-    - sed -i '255,260d' jhalfs
+    - sed -i '255,261d' jhalfs
     - ./jhalfs run
     - cd ../
     - tar -cf jhalfs
