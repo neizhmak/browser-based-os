@@ -11,8 +11,8 @@ build_task:
     - ls
     - apt update -y
     - apt install -y bash binutils bison coreutils diffutils findutils
-    gawk gcc grep gzip m4 make patch perl python sed tar 
-    texinfo xz wget sudo libxml2 libxslt docbook docbook-xsl-ns
+        gawk gcc grep gzip m4 make patch perl python sed tar 
+        texinfo xz wget sudo libxml2 libxslt docbook docbook-xsl-ns
     - adduser lfs --disabled-password
     - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - mkdir -pv $LFS/{sources,etc,var,lib64,tools} $LFS/usr/{bin,lib,sbin}
