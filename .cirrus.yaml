@@ -46,4 +46,4 @@ build_task:
     - ./jhalfs run
     - tar -cf ../jhalfs.tar /tmp/cirrus-ci-build/jhalfs
   lfs_commands_artifacts:
-    path: "/mnt/jhalfs.tar"
+    path: "jhalfs.tar"
