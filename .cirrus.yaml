@@ -41,6 +41,6 @@ build_task:
     - sed -i 's/read -r ANSWER/ANSWER="yes"/g' jhalfs
     - sed -i 's/read ANSWER/ANSWER="yes"/g' optimize/optimize_functions
     - ./jhalfs run
-    - tar -cf ../jhalfs.tar /tmp/cirrus-ci-build/jhalfs
+    - tar -cf /tmp/cirrus-ci-build/jhalfs.tar ../jhalfs
   lfs_commands_artifacts:
     path: "jhalfs.tar"
