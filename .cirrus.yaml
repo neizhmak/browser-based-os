@@ -41,7 +41,9 @@ build_task:
     - sed -i 's/read -r ANSWER/ANSWER="yes"/g' jhalfs
     - sed -i 's/read ANSWER/ANSWER="yes"/g' optimize/optimize_functions
     - ./jhalfs run
+    - tar -cf ../jhalfs.tar ../jhalfs
+    - tar -cf ../lfs.tar ../lfs
   jhalfs_artifacts:
-    path: "jhalfs"
+    path: "jhalfs.tar"
   lfs_artifacts:
-    path: "lfs"
+    path: "lfs.tar"
