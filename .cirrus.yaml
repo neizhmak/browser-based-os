@@ -37,10 +37,12 @@ build_task:
     - cp -rf configuration jhalfs/
   cross_compiler_script:
     - su - lfs
-    - cd /tmp/cirrus-ci-build/jhalfs
+    - cd $LFS/../jhalfs
     - sed -i 's/read -r ANSWER/ANSWER="yes"/g' jhalfs
     - sed -i 's/read ANSWER/ANSWER="yes"/g' optimize/optimize_functions
     - ./jhalfs run
+    - make -C $LFS/jhalfs
+    - ls
     - tar -cf ../jhalfs.tar ../jhalfs
     - tar -cf ../lfs.tar ../lfs
   jhalfs_artifacts:
