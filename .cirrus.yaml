@@ -7,7 +7,6 @@ env:
 
 build_task:
   preparation_script:
-    - id -u
     - apt update -y
     - apt upgrade -y
     - apt install -y bison git docbook-xml docbook-xsl g++ xsltproc
@@ -38,12 +37,11 @@ build_task:
     - cp -rf configuration jhalfs/
   cross_compiler_script:
     - su - lfs
-    - id -u
     - cd $LFS/../jhalfs
     - sed -i 's/read -r ANSWER/ANSWER="yes"/g' jhalfs
     - sed -i 's/read ANSWER/ANSWER="yes"/g' optimize/optimize_functions
     - ./jhalfs run
-    - id -u
+    - sed -i 's/exit/#/g' $LFS/jhalfs/Makefile
     - make -C $LFS/jhalfs
     - ls
     - tar -cf ../jhalfs.tar ../jhalfs
