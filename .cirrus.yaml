@@ -37,9 +37,8 @@ build_task:
     - cp -rf configuration /mnt/jhalfs/
   cross_compiler_script:
     - su - lfs
-    - ls ~/
     - cd /mnt/jhalfs
-    - sed -i 's/read ANSWER/ANSWER="yes"/g' {jhalfs,optimize/optimize_functions}
+    - sed {,-i} 's/read -r ANSWER/ANSWER="yes"/g' {jhalfs,optimize/optimize_functions}
 #    - sed -i '134,140d' jhalfs
 #    - sed -i '255,261d' jhalfs
 #    - sed -i '34,39d' optimize/optimize_functions
