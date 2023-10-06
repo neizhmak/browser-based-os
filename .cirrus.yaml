@@ -3,7 +3,7 @@ container:
   cpu: 1
   memory: 1G
 env:
-  LFS: /mnt/lfs
+  LFS: ~/lfs
 
 build_task:
   preparation_script:
@@ -25,7 +25,7 @@ build_task:
     - echo -e "
         set +h \n
         umask 022 \n
-        LFS=/mnt/lfs \n
+        LFS=~/lfs \n
         LC_ALL=POSIX \n
         LFS_TGT=$(uname -m)-lfs-linux-gnu \n
         PATH=/usr/bin \n
@@ -33,11 +33,12 @@ build_task:
         PATH=$LFS/tools/bin:$PATH \n
         CONFIG_SITE=$LFS/usr/share/config.site \n
         export LFS LC_ALL LFS_TGT PATH CONFIG_SITE \n" >> ~/.bashrc
-    - git clone https://git.linuxfromscratch.org/jhalfs.git /mnt/jhalfs
-    - cp -rf configuration /mnt/jhalfs/
+    - git clone https://git.linuxfromscratch.org/jhalfs.git
+    - cp -rf configuration jhalfs/
   cross_compiler_script:
     - su - lfs
-    - cd /mnt/jhalfs
+    - ls ~/
+    - cd jhalfs
     - sed -i 's/read/#/g' {jhalfs,optimize/optimize_functions}
 #    - sed -i '134,140d' jhalfs
 #    - sed -i '255,261d' jhalfs
@@ -46,4 +47,4 @@ build_task:
     - cd ../
     - tar -cf jhalfs.tar jhalfs
   lfs_commands_artifacts:
-    path: "/mnt/jhalfs.tar"
+    path: "jhalfs.tar"
