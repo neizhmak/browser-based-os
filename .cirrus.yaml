@@ -4,6 +4,7 @@ container:
   memory: 8G
 env:
   LFS: /tmp/cirrus-ci-build/lfs
+  MAKEFLAGS: '-j4'
 
 build_task:
   preparation_script:
