@@ -7,7 +7,7 @@ arch=('any')
 license=('GPL')
 depends=(
   # foundation
-  'bbo-filesystem' 'cachyos-linux-bore' 'musl' 'mdeved' 'dinit'
+  'bbo-filesystem' 'cachyos-linux-bore' 'glibc' 'mdeved' 'dinit' 'bbo-dinit-services'
 
   # tools
   'busybox' 'dhcpcd' 'wpa_supplicant' 'bluez' 'alsa'
