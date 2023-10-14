@@ -20,11 +20,8 @@ build_task:
     - cat /etc/makepkg.conf
     - su user -
     - git clone https://aur.archlinux.org/thorium-browser-bin.git
-    - for i in ./*; do
-        cd "$i"
-        makepkg -s
-        cd ../
-      done
+    - ls
+    - for i in ./*; do cd "$i"; makepkg -s; cd ../; done
     - repo-add /repo/pkgs.db.tar.gz /repo/*.pkg.tar.zst
     - ls /repo/
     - cp -r /usr/share/archiso/configs/baseline/ ./
