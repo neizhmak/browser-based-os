@@ -38,13 +38,13 @@ b2491cbaa758d170562b708a4c6cd96ee7f1dcef3f3cf2d156e13831be69c95d # tty5
 c701d117a831d985f7a8eff2f56f0206be1ca4c94bdacc30f3bfc7d38d6e4c4d # tty6)
 
 package() {
-   cd "$pkgdir"
-   for d in auxfscheck boot early-filesystems filesystems hwclock late-filesystems loginready mdevd mdevd-coldplug modules rcboot recovery rootfscheck rootrw single syslogd tty1 tty2 tty3 tty4 tty5 tty6; do
-      install -Dm755 $d /etc/dinit.d/
+  cd "$pkgdir"
+  install -dm755 /etc/dinit.d/{,boot.d,scripts}
+  for d in auxfscheck boot early-filesystems filesystems hwclock late-filesystems loginready mdevd mdevd-coldplug modules rcboot recovery rootfscheck rootrw single syslogd tty1 tty2 tty3 tty4 tty5 tty6; do
+    install -Dm644 $d /etc/dinit.d/
   done
   for d in scripts/early-filesystems.sh scripts/filesystems.sh scripts/late-filesystems.sh scripts/modules.sh scripts/rcboot.sh scripts/rootfscheck.sh; do
-      install -Dm755 $d /etc/dinit.d/scripts/
-   done
-   install -d -m755 /etc/dinit.d/boot.d/
-   ln -s /etc/dinit.d/{late-filesystems,modules} /etc/dinit.d/boot.d/
+    install -Dm644 $d /etc/dinit.d/scripts/
+  done
+  ln -sf /etc/dinit.d/{late-filesystems,modules} /etc/dinit.d/boot.d/
 }
