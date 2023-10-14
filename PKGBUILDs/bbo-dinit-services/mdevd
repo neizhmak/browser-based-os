@@ -1,0 +1,5 @@
+type = scripted
+command = /sbin/mdevd -D3 -O4
+logfile = /run/mdevd.log
+restart = false
+depends-on = early-filesystems

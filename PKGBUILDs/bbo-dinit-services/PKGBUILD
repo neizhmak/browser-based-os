@@ -1,0 +1,50 @@
+pkgname=bbo-dinit-services
+pkgver=1
+pkgrel=1
+pkgdesc="Dinit services for Browser-Based OS."
+arch=('any')
+url=https://github.com/neizhmak/browser-based-os
+license=('Apache')
+depends=('dinit')
+backup=('auxfscheck' 'boot' 'early-filesystems' 'filesystems' 'hwclock' 'late-filesystems' 'loginready' 'mdevd' 'mdevd-coldplug' 'modules' 'rcboot' 'recovery' 'rootfscheck' 'rootrw' 'scripts/early-filesystems.sh' 'scripts/filesystems.sh' 'scripts/late-filesystems.sh' 'scripts/modules.sh' 'scripts/rcboot.sh' 'scripts/rootfscheck.sh' 'single' 'syslogd' 'tty1' 'tty2' 'tty3' 'tty4' 'tty5' 'tty6')
+source=('auxfscheck' 'boot' 'early-filesystems' 'filesystems' 'hwclock' 'late-filesystems' 'loginready' 'mdevd' 'mdevd-coldplug' 'modules' 'rcboot' 'recovery' 'rootfscheck' 'rootrw' 'early-filesystems.sh' 'filesystems.sh' 'late-filesystems.sh' 'modules.sh' 'rcboot.sh' 'rootfscheck.sh' 'single' 'syslogd' 'tty1' 'tty2' 'tty3' 'tty4' 'tty5' 'tty6')
+sha256sums=(3761e90085fa12fd7a9801559ad2688c570996dc7f5c2e508be3cd953a28f050  # auxfscheck
+2518a623e153707e49cb25da516b9a189b592a64b17d223116f2eec180343bcd # boot
+c5f5b13463551c94444b68dd5c111444680c7da4a84eb8d13b4c41ad24cc5de7 # early-filesystems
+51b73fdd8c661e0a0cb640f4a828a729f53e04b89389b624f54a063bdf2354a0 # filesystems
+8e8923a2f0667fef1e553da2f4340fcf43562bd49b5b81d7c0fdeda4435353c7 # hwclock
+b6f5110403f75a56f3fb8e767bb6846260f56169b2ea20d269ac023f6ffca585 # late-filesystems
+a31232e7633077639a642a62a5819e75e66c3e07e832ded481b172680d49c15f # loginready
+dc1047b245de1de927954bcee5448d0fdbb0ada3a6942187d694a42c92e5d4db # mdevd
+5a01c7fd8120745db47e892f51bd723e646d1e3482770be9fea3d4666e2ad03a # mdevd-coldplug
+66c28763fabd21e366f6c4a74a2775a40244a413be2378ff037ec314a4ef3534 # modules
+10d8bbf7865abcc1a022b5bcdae414123bb2a5def974e3ca5903f6b17ad14c3e # rcboot
+34f9b5038ee73f3e04589301dcae6370d66a20db080b6de2cc149019a7d179c7 # recovery
+7678f94409d40da4728a821f0d9007eb3d62f8e64e0d487b1380d1599c51bea5 # rootfscheck
+dac1199cb3bbe200f87be6a45a3063826db7509c5830beb6f8d87bbbec6a3cb3 # rootrw
+f7b81ee60aa2033aa114ad96167357e1a9a2c875d427148e8cea9aedc90b13af  # scripts/early-filesystems.sh
+a351db084ef227ff134ad909723bd60f48433b15d2de9c2bda56a831dcf1e19d # scripts/filesystems.sh
+e6f2b19fd0595c9e6f99e29a0a2065aaed2eb4a47d1764519534892f96b882c5 # scripts/late-filesystems.sh
+a6e99c035a5a4cd33a70443886241e681b804513f48967571003c9553ae59399 # scripts/modules.sh
+53a593cc23e951eedffc85088ea70793ed540fd05e4b90e9d522674316601f49 # scripts/rcboot.sh
+edf4c29cd953d0719c5a5b1cfc1af2d47bf84ef1ecf14e6d22de7b7586a5a24d # scripts/rootfscheck.sh
+a2754f7c43475346e327e1e37b12d9f50cba2bf6ffe9f1f3967e627264f2a9bc # single
+0647946fff850fd9b6516fa7d5be5a749bb5de6dbc14af9dc3d5f14b6b7c5c23 # syslogd
+ce8d9b3e0aa007cabb0ed0b731f8bfd27633693de400563288f450fb9ff1f7f0 # tty1
+ba5f2cf1e1dded6fd27e00a978896b6c3fabb615112ee600396d932781ab3c94 # tty2
+8b39173555ea0bc604fefd7c5fd1940ce33f48d0f0d360aedcb6a5ab4e54003f # tty3
+10aac611f2197eb2585906c60d46b30a5a3e4a6e8ae047209f3408f26f8a3010 # tty4
+b2491cbaa758d170562b708a4c6cd96ee7f1dcef3f3cf2d156e13831be69c95d # tty5
+c701d117a831d985f7a8eff2f56f0206be1ca4c94bdacc30f3bfc7d38d6e4c4d # tty6)
+
+package() {
+   cd "$pkgdir"
+   for d in auxfscheck boot early-filesystems filesystems hwclock late-filesystems loginready mdevd mdevd-coldplug modules rcboot recovery rootfscheck rootrw single syslogd tty1 tty2 tty3 tty4 tty5 tty6; do
+      install -Dm755 $d /etc/dinit.d/
+  done
+  for d in scripts/early-filesystems.sh scripts/filesystems.sh scripts/late-filesystems.sh scripts/modules.sh scripts/rcboot.sh scripts/rootfscheck.sh; do
+      install -Dm755 $d /etc/dinit.d/scripts/
+   done
+   install -d -m755 /etc/dinit.d/boot.d/
+   ln -s /etc/dinit.d/{late-filesystems,modules} /etc/dinit.d/boot.d/
+}

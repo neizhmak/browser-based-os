@@ -1,0 +1,7 @@
+# Trigger udev events for already-present devices.
+
+type = scripted
+command = /bin/mdevd-coldplug -O4
+logfile = /run/mdevd-coldplug.log
+restart = false
+depends-on = mdevd
