@@ -1,0 +1,12 @@
+NAME="Browser-based OS"
+PRETTY_NAME="BBO"
+ID=browser-based-os
+BUILD_ID=rolling
+ID_LIKE=arch
+ANSI_COLOR="38;2;23;147;229"
+HOME_URL="https://github.com/neizhmak/browser-based-os"
+DOCUMENTATION_URL="https://github.com/neizhmak/browser-based-os/wiki"
+SUPPORT_URL="https://github.com/neizhmak/browser-based-os/discussions"
+BUG_REPORT_URL="https://github.com/neizhmak/browser-based-os/issues"
+EMAIL="ytartem0007@gmail.com"
+LOGO=joborun-logo

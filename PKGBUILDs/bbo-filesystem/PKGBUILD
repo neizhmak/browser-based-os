@@ -1,0 +1,127 @@
+pkgname=bbo-filesystem
+pkgver=1
+pkgrel=1
+pkgdesc='Base Browser-Based OS filesystem'
+arch=('any')
+license=('GPL-3.0-or-later')
+url='https://github.com/neizhmak/browser-based-os'
+depends=('iana-etc')
+backup=('etc/crypttab' 'etc/fstab' 'etc/group' 'etc/gshadow' 'etc/host.conf'
+        'etc/hosts' 'etc/issue' 'etc/ld.so.conf' 'etc/nsswitch.conf'
+        'etc/passwd' 'etc/profile' 'etc/resolv.conf' 'etc/securetty'
+        'etc/shadow' 'etc/shells' 'etc/subuid' 'etc/subgid')
+source=('crypttab' 'fstab' 'group' 'gshadow' 'host.conf' 'hosts'
+		'issue' 'ld.so.conf' 'locale.sh' 'motd' 'nsswitch.conf' 'os-release'
+        'passwd' 'profile' 'resolv.conf' 'securetty' 'shadow' 'shells'
+		'subuid' 'subgid' 'sysusers' 'sysctl' 'tmpfiles' 'modprobe.d.usb-load-ehci-first')
+sha256sums=(e03bede3d258d680548696623d5979c6edf03272e801a813c81ba5a5c64f4f82  # crypttab
+	115d324c8518affc7bec5559579d85f8f5491646b6110ea9567a586a26a76da9  # fstab
+	b1e8c06dd1785ad89df6c3d27b8b82218885a475424e19d54a7542c66dcba253  # group
+	d75a8553d13041c5f971fd8db52081ad4e46176a779c617b6218c479e79df957  # gshadow
+	250cfbb9a2b5e3cc9879ab2080eb3c7875fbe66eb375ce3f96eee335654a4979  # host.conf
+	8a63876eaf11641bbecdf2dea934c14e730dd4daceb32a5b172d08887a263f73  # hosts
+	dd677efadad3354fa9ab28e561c28e7c03829b01a4647307ede3a9260137a745  # issue
+	dad04a370e488aa85fb0a813a5c83cf6fd981ce01883fc59685447b092de84b5  # ld.so.conf
+	6c17fa911c82c27a30414624cdb32b44a76e60304cb875dc794bb9ee7aac21d4  # locale.sh
+	c307b0cfb3814649c2f45a149322c5ab83466517887c16af3a6504d2a7427320  # motd
+	b3f9aca43fd990384741213c747f856ae166b254475bb42c4dac676bd7fdde5a  # nsswitch.conf
+	bba0284d16d0a0c8226cc33c4eab102ee81aab010d5860acd93cd36bfd6a9651  # os-release
+	eac657125eb0e80c6cc79bac04f4c9b317dcea2d2d5436c03f26d73310bca6e6  # passwd
+	8f08231922fe185d3132f9aedded5cd688fb7c482a6f6f272402ded82fa4849a  # profile
+	66d732ad4cbdc7b3180f4750a5e74163d5c9a6797916a91311697cde95c2762b  # resolv.conf
+	d88be2b45b43605ff31dd83d6a138069b6c2e92bc8989b7b9ab9eba8da5f8c7b  # securetty
+	b302b2e8b06d27d078c5ad68655d441e2a07357b925a867dcf6a33f3a5464b3a  # shadow
+	3817d8c21be27addfa6dbca018447b1d0318745c0f7628361401062413e63cb1  # shells
+	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  # subgid
+	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  # subuid
+	e7c1a8ca1216879597348a553a7d5ebf0fa0de66179e3bae697935dc86aa3958  # sysusers
+	89e43a0b7028f52d5c8e7fb961d962c4b4f4e9595880a6157274ddb2c7c0b6b4  # sysctl
+	d883a15209635206b044e8ac943f44e0ec7ec0a0ef61915163707642da0ac989  # tmpfiles
+	90fb123aa8c0176bc144322b585bb889181c437542ddbe546af43e11b95be6ab  # modprobe.d.usb-load-ehci-first)
+
+
+package() {
+  cd "$pkgdir"
+
+  # setup root filesystem
+  for d in boot dev etc home mnt usr var opt srv/http run; do
+    install -d -m755 $d
+  done
+  install -d -m555 proc
+  install -d -m555 sys
+# we don't see a good reason for single user/admin systems for root 
+# prohibiting read rights to the home directory, on enterprise systems 
+# it is recommended to have 0750 for /root 
+  install -d -m0755 root
+  install -d -m1777 tmp
+  install -d -m0777 src
+  # vsftpd won't run with write perms on /srv/ftp
+  # ftp (uid 14/gid 11)
+  install -d -m555 -g 11 srv/ftp
+
+  # setup /etc and /usr/share/factory/etc
+  install -d etc/{ld.so.conf.d,skel,profile.d} usr/share/factory/etc
+  for f in fstab group host.conf hosts issue ld.so.conf motd nsswitch.conf \
+  passwd securetty shells profile subuid subgid; do
+    install -m644 "$srcdir"/$f etc/
+    install -m644 "$srcdir"/$f usr/share/factory/etc/
+  done
+  install -m644 "$srcdir"/resolv.conf $pkgdir/etc/resolv.conf
+  ln -s ../proc/self/mounts etc/mtab
+  for f in gshadow shadow crypttab; do
+    install -m600 "$srcdir"/$f etc/
+    install -m600 "$srcdir"/$f usr/share/factory/etc/
+  done
+  install -Dm644 "$srcdir"/modprobe.d.usb-load-ehci-first $pkgdir/usr/lib/modprobe.d/usb-load-ehci-first.conf
+  touch etc/arch-release
+  install -m644 "$srcdir"/locale.sh $pkgdir/etc/profile.d/locale.sh
+  install -Dm644 "$srcdir"/os-release $pkgdir/usr/lib/os-release
+  ln --symbolic --relative $pkgdir/usr/lib/os-release $pkgdir/etc/os-release
+
+  # setup /var
+  for d in cache local opt log/old lib/misc lib/pacman empty; do
+    install -d -m755 var/$d
+  done
+  install -d -m1777 var/{tmp,spool/mail}
+
+  # allow setgid games (gid 50) to write scores
+  install -d -m775 -g 50 var/games
+  ln -s spool/mail var/mail
+  ln -s ../run var/run
+  ln -s ../run/lock var/lock
+
+  # setup /usr hierarchy
+  for d in bin include lib share/{misc,pixmaps} src; do
+    install -d -m755 usr/$d
+  done
+  for d in {1..8}; do
+    install -d -m755 usr/share/man/man$d
+  done
+
+  # add lib symlinks
+  ln -s usr/lib lib
+  [[ $CARCH = 'x86_64' ]] && {
+    ln -s usr/lib lib64
+    ln -s lib usr/lib64
+  }
+
+  # add bin symlinks
+  ln -s usr/bin bin
+  ln -s usr/bin sbin
+  ln -s bin usr/sbin
+
+  # setup /usr/local hierarchy
+  for d in bin etc games include lib man sbin share src; do
+    install -d -m755 usr/local/$d
+  done
+  ln -s ../man usr/local/share/man
+
+  # setup systemd-sysctl
+  install -D -m644 "$srcdir"/sysctl $pkgdir/usr/lib/sysctl.d/10-arch.conf
+
+  # setup systemd-sysusers wrapper
+  install -D -m644 "$srcdir"/sysusers $pkgdir/usr/lib/sysusers.d/joborun.conf
+
+  # setup systemd-tmpfiles wrapper
+  install -D -m644 "$srcdir"/tmpfiles $pkgdir/usr/lib/tmpfiles.d/joborun.conf
+}

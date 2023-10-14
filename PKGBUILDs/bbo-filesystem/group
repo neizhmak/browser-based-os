@@ -1,0 +1,10 @@
+root:x:0:root
+tty:x:5:
+wheel:x:10:make
+log:x:19:s6log
+games:x:50:
+dbus:x:81:
+nobody:x:99:
+users:x:100:
+polkitd:x:102:
+make:x:1000:
