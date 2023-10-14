@@ -4,7 +4,7 @@ pkgrel=1
 pkgdesc='A collection of notes, scripts, and configurations for systems running mdev as a replacement for udev.'
 url='https://github.com/slashbeast/mdev-like-a-boss'
 source=("https://github.com/slashbeast/$pkgname/archive/refs/tags/$pkgver.tar.gz")
-arch=(x86_64 arm aarch64)
+arch=('any')
 license=(Apache)
 makedepends=(make)
 sha256sums=('5c6c015099cdfb7f9340b8ae23a845faebc1a7ff92cf20e53c2f916be9298e43')
@@ -12,4 +12,5 @@ sha256sums=('5c6c015099cdfb7f9340b8ae23a845faebc1a7ff92cf20e53c2f916be9298e43')
 package() {
   cd "$srcdir/$pkgver"
   cp -rv "./*" "/opt/mdev/"
+  ln -sf /opt/mdev/mdev.conf /etc/mdev.conf
 }
