@@ -7,16 +7,16 @@ arch=('any')
 license=('GPL')
 depends=(
   # foundation
-  'bbo-filesystem' 'cachyos-linux-bore' 'glibc' 'mdeved' 'dinit' 'bbo-dinit-services'
+  'bbo-filesystem' 'cachyos-linux-bore' 'glibc' 'mdeved' 'dinit' 'bbo-dinit-services' 'grub'
 
   # tools
-  'busybox' 'dhcpcd' 'wpa_supplicant' 'bluez' 'alsa'
+  'busybox' 'wpa_supplicant' 'bluez' 'alsa'
 
   # workspace
   'dwl' 'thorium'
 
   # others
-  'libressl' 'linux-firmware' 'licenses' 'libudev-zero' 'mdev-like-a-boss'
-)
+  'libressl' 'linux-firmware' 'licenses' 'libudev-zero' 'mdev-like-a-boss' 'seatd' 'noto-fonts'
+  )
 
 # vim: ts=2 sw=2 et:
