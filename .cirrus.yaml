@@ -6,6 +6,7 @@ container:
 build_task:
   preparation_script:
     - chmod -R 777 ./
+    - sudo pacman-key --init
     - pacman -Suyy --noconfirm wget sudo base-devel archiso
     - wget https://mirror.cachyos.org/cachyos-repo.tar.xz
     - tar xvf cachyos-repo.tar.xz 
