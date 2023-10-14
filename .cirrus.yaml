@@ -19,8 +19,11 @@ build_task:
     - echo 'PKGDEST="/repo/"' >> /etc/makepkg.conf
     - cat /etc/makepkg.conf
     - su user -
+    - git clone https://aur.archlinux.org/thorium-browser-bin.git
     - for i in ./*; do
-        makepkg -si
+        cd "$i"
+        makepkg -s
+        cd ../
       done
     - repo-add /repo/pkgs.db.tar.gz /repo/*.pkg.tar.zst
     - ls /repo/
