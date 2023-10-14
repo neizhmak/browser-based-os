@@ -7,19 +7,16 @@ build_task:
   preparation_script:
     - chmod -R 777 ./
     - pacman-key --init
-    - pacman -Suyy --noconfirm wget sudo git base-devel archiso
+    - pacman -Suyy --noconfirm wget git base-devel archiso
     - pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
     - pacman-key --lsign-key F3B607488DB35A47
     - pacman -U --noconfirm 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-3-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-18-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/pacman-6.0.2-13-x86_64.pkg.tar.zst'
-    - useradd -m -g users -G wheel -s /bin/bash user
-    - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - cd PKGBUILDs
     - echo 'PKGDEST="/repo/"' >> /etc/makepkg.conf
-    - su user -
     - git clone https://aur.archlinux.org/thorium-browser-bin.git
-    - for i in ./*; do cd "$i"; makepkg -s; cd ../; done
+    - for i in ./*; do cd "$i"; su nobody -c "makepkg -s"; cd ../; done
     - repo-add /repo/pkgs.db.tar.gz /repo/*.pkg.tar.zst
     - ls /repo/
     - cp -r /usr/share/archiso/configs/baseline/ ./
