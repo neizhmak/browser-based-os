@@ -7,7 +7,7 @@ build_task:
   preparation_script:
     - chmod -R 777 ./
     - pacman-key --init
-    - pacman -Suyy --noconfirm wget sudo base-devel archiso
+    - pacman -Suyy --noconfirm wget sudo git base-devel archiso
     - pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
     - pacman-key --lsign-key F3B607488DB35A47
     - pacman -U --noconfirm 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-3-1-any.pkg.tar.zst' 
