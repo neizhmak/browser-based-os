@@ -13,14 +13,12 @@ build_task:
     - pacman -U --noconfirm 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-3-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-18-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/pacman-6.0.2-13-x86_64.pkg.tar.zst'
-    - useradd user
+    - useradd -m -g users -G wheel -s /bin/bash user
     - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - cd PKGBUILDs
     - echo 'PKGDEST="/repo/"' >> /etc/makepkg.conf
-    - cat /etc/makepkg.conf
     - su user -
     - git clone https://aur.archlinux.org/thorium-browser-bin.git
-    - ls
     - for i in ./*; do cd "$i"; makepkg -s; cd ../; done
     - repo-add /repo/pkgs.db.tar.gz /repo/*.pkg.tar.zst
     - ls /repo/
