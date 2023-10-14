@@ -1,0 +1,27 @@
+container:
+  image: archlinux
+  cpu: 1
+  memory: 1G
+
+build_task:
+  preparation_script:
+    - ls -l
+    - pacman -Suy git archiso sudo
+    - pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
+    - pacman-key --lsign-key F3B607488DB35A47
+    - pacman -U 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-3-1-any.pkg.tar.zst' 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-18-1-any.pkg.tar.zst' 'https://mirror.cachyos.org/repo/x86_64/cachyos/pacman-6.0.2-13-x86_64.pkg.tar.zst'
+    - useradd user
+    - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+    - cd PKGBUILD
+    - cat /etc/makepkg.conf
+    - echo 'PKGDEST="/repo/"' >> /etc/makepkg.conf
+    - su user -
+    - for i in ./*; do
+        makepkg -si
+      done
+    - repo-add /repo/pkgs.db.tar.gz /repo/*.pkg.tar.zst
+    - cp -r /usr/share/archiso/configs/baseline/ ./
+    - cp -f {packages.x86_64,pacman.conf} baseline/
+    - mkarchiso -v ../baseline/profiledef.sh
+  jhalfs_artifacts:
+    path: "work/*"
