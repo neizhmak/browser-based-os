@@ -8,7 +8,7 @@ build_task:
     - pacman-key --init
     - pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
     - pacman-key --lsign-key F3B607488DB35A47
-    - pacman -Suy  --noconfirm wget git sudo gcc-libs musl kernel-headers-musl base-devel archiso
+    - pacman -Suy  --noconfirm wget git sudo gcc-libs musl kernel-headers-musl llvm lld clang base-devel archiso
     - pacman -U --noconfirm 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-3-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-18-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/pacman-6.0.2-13-x86_64.pkg.tar.zst'
