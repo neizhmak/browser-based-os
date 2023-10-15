@@ -10,8 +10,6 @@ makedepends=(make)
 sha256sums=('5c6c015099cdfb7f9340b8ae23a845faebc1a7ff92cf20e53c2f916be9298e43')
 
 package() {
-  ls
-  ls "$srcdir"
-  install -dm755 "$srcdir/*" "$pkgdir/opt/mdev/"
+  install -dm755 "$srcdir/$pkgname-$pkgver/*" "$pkgdir/opt/mdev/"
   ln -sf "$pkgdir/opt/mdev/mdev.conf" "$pkgdir/etc/mdev.conf"
 }
