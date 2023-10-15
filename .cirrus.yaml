@@ -21,15 +21,15 @@ build_task:
     - git clone https://aur.archlinux.org/dinit.git
     - mkdir /repo
     - chmod -R 777 {../,/repo}
-    # - echo 'PKGDEST="/repo/"' >> /etc/makepkg.conf
     - useradd user
-    # - cp -f ../pacman.conf /etc/
+    - cp -f ../pacman.conf /etc/
     - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - for i in thorium-browser-bin skalibs mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem base; do
         cd "$i"; su user -c "makepkg --noconfirm";
         cp *.pkg.tar.zst /repo/;
+        repo-add /repo/pkgs.db.tar.gz "/repo/*$i*";
+        pacman -Sy;
         cd ../; done
-    - repo-add /repo/pkgs.db.tar.gz /repo/*; 
     - ls /repo/
     - cd ../
     - cp -r /usr/share/archiso/configs/baseline/ ./
