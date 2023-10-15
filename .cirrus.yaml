@@ -1,5 +1,5 @@
 container:
-  image: archlinux
+  image: archlinux:base-devel
   cpu: 1
   memory: 1G
 
