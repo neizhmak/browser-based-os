@@ -5,6 +5,7 @@ container:
 
 build_task:
   preparation_script:
+    - cat /etc/makepkg.conf
     - echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
     - locale-gen
     - pacman-key --init
