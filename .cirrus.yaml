@@ -18,6 +18,7 @@ build_task:
     - git clone https://aur.archlinux.org/dinit.git
     - mkdir /repo
     - chmod -R 777 {../,/repo}
+    - cp ../pacman.conf /etc/
     - echo 'PKGDEST="/repo/"' >> /etc/makepkg.conf
     - useradd -m -g users user
     - for i in thorium-browser-bin skalibs mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem base; do
