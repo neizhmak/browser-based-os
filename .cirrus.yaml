@@ -6,30 +6,29 @@ container:
 build_task:
   preparation_script:
     - pacman-key --init
-    - pacman -Suyy --noconfirm wget git base-devel archiso
     - pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
     - pacman-key --lsign-key F3B607488DB35A47
     - pacman -U --noconfirm 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-3-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-18-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/pacman-6.0.2-13-x86_64.pkg.tar.zst'
+    - cp -f ../pacman.conf /etc/
+    - pacman -Suy --noconfirm wget git base-devel archiso
     - cd PKGBUILDs
     - git clone https://aur.archlinux.org/thorium-browser-bin.git
     - git clone https://aur.archlinux.org/skalibs.git
     - git clone https://aur.archlinux.org/dinit.git
     - mkdir /repo
     - chmod -R 777 {../,/repo}
-    - cp -f ../pacman.conf /etc/
     - echo 'PKGDEST="/repo/"' >> /etc/makepkg.conf
     - useradd -m -g users user
     - for i in thorium-browser-bin skalibs mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem base; do
         cd "$i"; su user -c "makepkg -s"; cd ../; done
     - repo-add /repo/pkgs.db.tar.gz /repo/*.pkg.tar.zst
     - ls /repo/
-    - exit
     - cd ../
     - cp -r /usr/share/archiso/configs/baseline/ ./
     - cp -f {packages.x86_64,pacman.conf} baseline/
-    - mkarchiso -v ../baseline/profiledef.sh
+    - mkarchiso -v ./baseline/profiledef.sh
     - ls work/
   jhalfs_artifacts:
     path: "work/*"
