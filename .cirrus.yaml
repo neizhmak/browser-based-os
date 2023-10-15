@@ -10,9 +10,15 @@ build_task:
   preparation_script:
     - apt update -y
     - apt upgrade -y
-    - apt install -y bison git docbook-xml docbook-xsl g++ xsltproc
+    - apt install -y bison git docbook-xml docbook-xsl g++ xsltproc wget
         gawk gcc m4 make patch perl python-is-python3 libxml2-utils
         texinfo xz-utils wget sudo libxml2 libxslt1.1 docbook docbook-xsl-ns
+    - wget clone https://skarnet.org/software/mdevd/mdevd-0.1.6.2.tar.gz
+    - tar xvzf mdevd-0.1.6.2.tar.gz
+    - cd mdevd-0.1.6.2
+    - ./configure --prefix=/usr
+    - make
+    - exit
     - adduser lfs --disabled-password
     - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - mkdir -pv $LFS/{sources,etc,var,lib64,tools} $LFS/usr/{bin,lib,sbin}
