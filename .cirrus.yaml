@@ -8,7 +8,7 @@ build_task:
     - pacman-key --init
     - pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
     - pacman-key --lsign-key F3B607488DB35A47
-    - pacman -Suy  --noconfirm wget git sudo base-devel archiso
+    - pacman -Suy  --noconfirm wget git sudo gcc-libs base-devel archiso
     - pacman -U --noconfirm 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-3-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-18-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/pacman-6.0.2-13-x86_64.pkg.tar.zst'
@@ -19,10 +19,10 @@ build_task:
     - mkdir /repo
     - chmod -R 777 {../,/repo}
     - echo 'PKGDEST="/repo/"' >> /etc/makepkg.conf
-    - useradd -m -g users user
+    - useradd user
     - cp -f ../pacman.conf /etc/
     - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-    - for i in thorium-browser-bin skalibs mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem base; do
+    - for i in busybox thorium-browser-bin skalibs mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem base; do
         cd "$i"; su user -c "makepkg -s --noconfirm"; 
         repo-add /repo/pkgs.db.tar.gz /repo/*"$i"*; 
         pacman -Sy; cd ../; done
