@@ -19,4 +19,8 @@ depends=(
   'libressl' 'linux-firmware' 'licenses' 'libudev-zero' 'mdev-like-a-boss' 'seatd' 'noto-fonts'
   )
 
+  package() {
+    /usr/bin/busybox --install -s
+  }
+
 # vim: ts=2 sw=2 et:
