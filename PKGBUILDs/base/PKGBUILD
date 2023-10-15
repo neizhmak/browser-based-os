@@ -7,7 +7,7 @@ arch=('any')
 license=('GPL')
 depends=(
   # foundation
-  'bbo-filesystem' 'cachyos-linux-bore' 'glibc' 'mdeved' 'dinit' 'bbo-dinit-services' 'grub'
+  'bbo-filesystem' 'cachyos-linux-bore' 'glibc' 'dinit' 'bbo-dinit-services' 'grub'
 
   # tools
   'busybox' 'wpa_supplicant' 'bluez' 'alsa'
@@ -21,6 +21,19 @@ depends=(
 
   package() {
     /usr/bin/busybox --install -s
+    # Temporary workaround
+    wget https://www.skarnet.org/software/skalibs/skalibs-2.13.1.1.tar.gz
+    wget https://skarnet.org/software/mdevd/mdevd-0.1.6.2.tar.gz
+    tar xvzf mdevd-0.1.6.2.tar.gz
+    tar xvzf skalibs-2.13.1.1.tar.gz
+    cd skalibs-2.13.1.1
+    ./configure --prefix=/usr --datadir=/etc
+    make
+    make install
+    cd ../mdevd-0.1.6.2
+    ./configure --prefix=/usr
+    make
+    make install
   }
 
 # vim: ts=2 sw=2 et:
