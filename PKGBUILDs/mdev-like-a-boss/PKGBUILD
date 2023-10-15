@@ -1,5 +1,5 @@
 pkgname=mdev-like-a-boss
-pkgver=2020.01.19
+pkgver=20200119
 pkgrel=1
 pkgdesc='A collection of notes, scripts, and configurations for systems running mdev as a replacement for udev.'
 url='https://github.com/slashbeast/mdev-like-a-boss'
