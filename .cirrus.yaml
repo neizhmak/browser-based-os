@@ -25,7 +25,7 @@ build_task:
     - cp -f ../pacman.conf /etc/
     - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - for i in thorium-browser-bin skalibs mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem base; do
-        cd "$i"; su user -c "makepkg --noconfirm";
+        cd "$i"; su user -c "makepkg -s --noconfirm";
         cp *.pkg.tar.zst /repo/;
         repo-add /repo/pkgs.db.tar.gz /repo/"$i"*;
         pacman -Sy;
