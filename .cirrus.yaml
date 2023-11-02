@@ -20,7 +20,7 @@ build_task:
     - git clone https://aur.archlinux.org/dinit.git
     - mkdir /repo
     - chmod -R 777 {../,/repo}
-    - cp -f ../pacman.conf /etc/
+#    - cp -f ../pacman.conf /etc/
     #- wget https://www.skarnet.org/software/skalibs/skalibs-2.13.1.1.tar.gz
     #- tar xvzf skalibs-2.13.1.1.tar.gz
     #- cd skalibs-2.13.1.1
