@@ -20,17 +20,17 @@ build_task:
     - mkdir /repo
     - chmod -R 777 {../,/repo}
     - cp -f ../pacman.conf /etc/
+    - useradd user
+    - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - wget https://www.skarnet.org/software/skalibs/skalibs-2.13.1.1.tar.gz
     - tar xvzf skalibs-2.13.1.1.tar.gz
     - cd skalibs-2.13.1.1
     - ./configure --prefix=/usr --datadir=/etc
     - make
     - make install
-    - useradd user
-    - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 #    - cd skalibs
 #    - su user -c "makepkg -si --noconfirm"
-#    - cd ../
+    - cd ../
     - for i in thorium-browser-bin skalibs mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem base; do
         cd "$i"; su user -c "makepkg -s --noconfirm";
         cp *.pkg.tar.zst /repo/;
