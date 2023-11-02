@@ -21,17 +21,15 @@ build_task:
     - mkdir /repo
     - chmod -R 777 {../,/repo}
     - cp -f ../pacman.conf /etc/
-    #- echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     #- wget https://www.skarnet.org/software/skalibs/skalibs-2.13.1.1.tar.gz
     #- tar xvzf skalibs-2.13.1.1.tar.gz
     #- cd skalibs-2.13.1.1
     #- ./configure --prefix=/usr --datadir=/etc
     #- make
     #- make install
-    - useradd -m user
+    - useradd -m -g users -G wheel -s /bin/bash user
+    - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - su user
-    - cd ~/
-    - ls
     - cd skalibs
     - makepkg -si --noconfirm
     - cd ../
