@@ -27,7 +27,7 @@ build_task:
     #- ./configure --prefix=/usr --datadir=/etc
     #- make
     #- make install
-    - useradd -m -g users -G wheel -s /bin/bash user
+    - useradd user
     - passwd -d user
     - echo -e "user ALL=(ALL) ALL\n" >> /etc/sudoers
     - cd yay-bin
