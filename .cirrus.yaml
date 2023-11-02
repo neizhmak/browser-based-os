@@ -28,7 +28,7 @@ build_task:
     #- ./configure --prefix=/usr --datadir=/etc
     #- make
     #- make install
-    - seradd -m user
+    - useradd -m user
     - su user
     - cd ~/
     - ls
