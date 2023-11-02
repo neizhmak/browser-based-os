@@ -31,8 +31,9 @@ build_task:
     - passwd -d user
     - echo -e "user ALL=(ALL) ALL\n" >> /etc/sudoers
     - cd yay
-    - su user -c "makepkg -si"
+    - su user -c "makepkg -si -noconfirm"
     - yay --help
+    - exit
 #    - cd ~/
 #    - sudo -u user bash -c "
     - cd skalibs && makepkg -si --noconfirm && cd ../
