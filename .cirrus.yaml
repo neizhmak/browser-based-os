@@ -29,11 +29,12 @@ build_task:
     #- ./configure --prefix=/usr --datadir=/etc
     #- make
     #- make install
+    - su user
     - cd skalibs
-    - su user -c "makepkg -si --noconfirm"
+    - makepkg -si --noconfirm
     - cd ../
     - for i in thorium-browser-bin mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem base; do
-        cd "$i"; su user -c "makepkg -s --noconfirm";
+        cd "$i"; makepkg -s --noconfirm;
         cp *.pkg.tar.zst /repo/;
         repo-add /repo/pkgs.db.tar.gz /repo/"$i"*;
         pacman -Sy;
