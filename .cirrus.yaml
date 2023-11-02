@@ -16,7 +16,7 @@ build_task:
         'https://mirror.cachyos.org/repo/x86_64/cachyos/pacman-6.0.2-13-x86_64.pkg.tar.zst'
     - cd PKGBUILDs
     - git clone https://aur.archlinux.org/thorium-browser-bin.git
-    - git clone https://aur.archlinux.org/yay.git
+    - git clone https://aur.archlinux.org/yay-bin.git
     - git clone https://aur.archlinux.org/dinit.git
     - mkdir /repo
     - chmod -R 777 {../,/repo}
@@ -30,7 +30,7 @@ build_task:
     - useradd -m -g users -G wheel -s /bin/bash user
     - passwd -d user
     - echo -e "user ALL=(ALL) ALL\n" >> /etc/sudoers
-    - cd yay
+    - cd yay-bin
     - su user -c "makepkg -si --noconfirm"
     - yay --help
     - exit
