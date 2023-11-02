@@ -16,11 +16,10 @@ build_task:
         'https://mirror.cachyos.org/repo/x86_64/cachyos/pacman-6.0.2-13-x86_64.pkg.tar.zst'
     - cd PKGBUILDs
     - git clone https://aur.archlinux.org/thorium-browser-bin.git
-    - git clone https://aur.archlinux.org/yay-bin.git
     - git clone https://aur.archlinux.org/dinit.git
     - mkdir /repo
     - chmod -R 777 {../,/repo}
-#    - cp -f ../pacman.conf /etc/
+    - cp -f ../pacman.conf /etc/
     #- wget https://www.skarnet.org/software/skalibs/skalibs-2.13.1.1.tar.gz
     #- tar xvzf skalibs-2.13.1.1.tar.gz
     #- cd skalibs-2.13.1.1
@@ -29,15 +28,11 @@ build_task:
     #- make install
     - useradd user
     - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-    - cd yay-bin
-    - su user -c "makepkg -s --noconfirm"
-    - yay --help
-    - exit
-#    - cd ~/
-#    - sudo -u user bash -c "
-    - cd skalibs && makepkg -si --noconfirm && cd ../
+    - cd skalibs
+    - su user -c "makepkg -si --noconfirm"
+    - cd ../
     - for i in thorium-browser-bin mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem base; do
-        cd "$i"; makepkg -s --noconfirm;
+        cd "$i"; su user -c "makepkg -s --noconfirm";
         cp *.pkg.tar.zst /repo/;
         repo-add /repo/pkgs.db.tar.gz /repo/"$i"*;
         pacman -Sy;
