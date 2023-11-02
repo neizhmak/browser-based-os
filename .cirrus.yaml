@@ -20,7 +20,6 @@ build_task:
     - git clone https://aur.archlinux.org/dinit.git
     - mkdir /repo
     - chmod -R 777 {../,/repo}
-    - useradd user
     - cp -f ../pacman.conf /etc/
     #- echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     #- wget https://www.skarnet.org/software/skalibs/skalibs-2.13.1.1.tar.gz
@@ -29,7 +28,10 @@ build_task:
     #- ./configure --prefix=/usr --datadir=/etc
     #- make
     #- make install
+    - seradd -m user
     - su user
+    - cd ~/
+    - ls
     - cd skalibs
     - makepkg -si --noconfirm
     - cd ../
