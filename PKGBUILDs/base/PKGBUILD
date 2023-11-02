@@ -16,24 +16,11 @@ depends=(
   'dwl' 'thorium-browser-bin'
 
   # others
-  'libressl' 'linux-firmware' 'licenses' 'libudev-zero' 'mdev-like-a-boss' 'seatd' 'noto-fonts'
+  'libressl' 'linux-firmware' 'licenses' 'libudev-zero' 'mdev-like-a-boss' 'seatd' 'noto-fonts' 'skalibs'
   )
 
   package() {
     /usr/bin/busybox --install -s
-    # Temporary workaround
-    wget https://www.skarnet.org/software/skalibs/skalibs-2.13.1.1.tar.gz
-    wget https://skarnet.org/software/mdevd/mdevd-0.1.6.2.tar.gz
-    tar xvzf mdevd-0.1.6.2.tar.gz
-    tar xvzf skalibs-2.13.1.1.tar.gz
-    cd skalibs-2.13.1.1
-    ./configure --prefix=/usr --datadir=/etc
-    make
-    make install
-    cd ../mdevd-0.1.6.2
-    ./configure --prefix=/usr
-    make
-    make install
   }
 
 # vim: ts=2 sw=2 et:
