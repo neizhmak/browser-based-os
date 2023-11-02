@@ -30,6 +30,9 @@ build_task:
     - useradd -m -g users -G wheel -s /bin/bash user
     - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - su user
+    - cd ~/
+    - git clone https://github.com/neizhmak/browser-based-os.git -b test
+    - cd browser-based-os/PKGBUILDs
     - cd skalibs
     - makepkg -si --noconfirm
     - cd ../
