@@ -24,6 +24,19 @@ build_task:
     - useradd user
     - cp -f ../pacman.conf /etc/
     - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+    - wget https://www.skarnet.org/software/skalibs/skalibs-2.13.1.1.tar.gz
+    - wget https://skarnet.org/software/mdevd/mdevd-0.1.6.2.tar.gz
+    - tar xvzf mdevd-0.1.6.2.tar.gz
+    - tar xvzf skalibs-2.13.1.1.tar.gz
+    - cd skalibs-2.13.1.1
+    - ./configure --prefix=/usr --datadir=/etc
+    - make
+    - make install
+    - cd ../mdevd-0.1.6.2
+    - ./configure --prefix=/usr
+    - make
+    - make install
+    - cd ../
     - for i in thorium-browser-bin skalibs mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem base; do
         cd "$i"; su user -c "makepkg -s --noconfirm";
         cp *.pkg.tar.zst /repo/;
