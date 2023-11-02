@@ -28,8 +28,7 @@ build_task:
     #- make
     #- make install
     - useradd user
-    - passwd -d user
-    - echo -e "user ALL=(ALL) ALL\n" >> /etc/sudoers
+    - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - cd yay-bin
     - su user -c "makepkg -si --noconfirm"
     - yay --help
