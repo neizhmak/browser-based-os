@@ -22,7 +22,7 @@ build_task:
     - chmod -R 777 {../,/repo}
     - useradd user
     - cp -f ../pacman.conf /etc/
-    - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+    #- echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     #- wget https://www.skarnet.org/software/skalibs/skalibs-2.13.1.1.tar.gz
     #- tar xvzf skalibs-2.13.1.1.tar.gz
     #- cd skalibs-2.13.1.1
