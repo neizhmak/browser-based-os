@@ -30,8 +30,8 @@ build_task:
     - useradd user
     - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - cd yay-bin
-    - su user -c "makepkg -si --noconfirm"
-    - yay -Suy --noconfirm mdevd
+    - su user -c "makepkg -s --noconfirm"
+    - yay --help
     - exit
 #    - cd ~/
 #    - sudo -u user bash -c "
