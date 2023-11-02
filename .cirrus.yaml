@@ -30,11 +30,10 @@ build_task:
     - useradd -m -g users -G wheel -s /bin/bash user
     - passwd -d user
     - echo -e "user ALL=(ALL) ALL\n" >> /etc/sudoers
-#    - su user
+    - su user -
 #    - cd ~/
-#    - git clone https://github.com/neizhmak/browser-based-os.git -b test
-#    - cd browser-based-os/PKGBUILDs
-    - sudo -u user bash -c "cd skalibs && makepkg -si --noconfirm && cd ../"
+#    - sudo -u user bash -c "
+    - cd skalibs && makepkg -si --noconfirm && cd ../
     - for i in thorium-browser-bin mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem base; do
         cd "$i"; makepkg -s --noconfirm;
         cp *.pkg.tar.zst /repo/;
