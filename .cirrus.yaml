@@ -13,7 +13,7 @@ build_task:
     - pacman -Suy  --noconfirm wget git sudo base-devel archiso
     - pacman -U --noconfirm 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-3-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-18-1-any.pkg.tar.zst' 
-        'https://mirror.cachyos.org/repo/x86_64/cachyos/pacman-6.0.2-13-x86_64.pkg.tar.zst'
+        'https://mirror.cachyos.org/repo/x86_64/cachyos/pacman-6.0.2-14-x86_64.pkg.tar.zst'
     - cd PKGBUILDs
     - git clone https://aur.archlinux.org/thorium-browser-bin.git
     - git clone https://aur.archlinux.org/dinit.git
