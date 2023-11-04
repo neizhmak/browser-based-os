@@ -6,7 +6,7 @@ arch=('any')
 url=https://github.com/neizhmak/browser-based-os
 license=('Apache')
 depends=('dinit')
-backup=('auxfscheck' 'boot' 'early-filesystems' 'filesystems' 'hwclock' 'late-filesystems' 'loginready' 'mdevd' 'mdevd-coldplug' 'modules' 'rcboot' 'recovery' 'rootfscheck' 'rootrw' 'scripts/early-filesystems.sh' 'scripts/filesystems.sh' 'scripts/late-filesystems.sh' 'scripts/modules.sh' 'scripts/rcboot.sh' 'scripts/rootfscheck.sh' 'single' 'syslogd' 'tty1' 'tty2' 'tty3' 'tty4' 'tty5' 'tty6')
+backup=('etc/dinit.d/auxfscheck' 'etc/dinit.d/boot' 'etc/dinit.d/early-filesystems' 'etc/dinit.d/filesystems' 'etc/dinit.d/hwclock' 'etc/dinit.d/late-filesystems' 'etc/dinit.d/loginready' 'etc/dinit.d/mdevd' 'etc/dinit.d/mdevd-coldplug' 'etc/dinit.d/modules' 'etc/dinit.d/rcboot' 'etc/dinit.d/recovery' 'etc/dinit.d/rootfscheck' 'etc/dinit.d/rootrw' 'etc/dinit.d/scripts/early-filesystems.sh' 'etc/dinit.d/scripts/filesystems.sh' 'etc/dinit.d/scripts/late-filesystems.sh' 'etc/dinit.d/scripts/modules.sh' 'etc/dinit.d/scripts/rcboot.sh' 'etc/dinit.d/scripts/rootfscheck.sh' 'etc/dinit.d/single' 'etc/dinit.d/syslogd' 'etc/dinit.d/tty1' 'etc/dinit.d/tty2' 'etc/dinit.d/tty3' 'etc/dinit.d/tty4' 'etc/dinit.d/tty5' 'etc/dinit.d/tty6')
 source=('auxfscheck' 'boot' 'early-filesystems' 'filesystems' 'hwclock' 'late-filesystems' 'loginready' 'mdevd' 'mdevd-coldplug' 'modules' 'rcboot' 'recovery' 'rootfscheck' 'rootrw' 'early-filesystems.sh' 'filesystems.sh' 'late-filesystems.sh' 'modules.sh' 'rcboot.sh' 'rootfscheck.sh' 'single' 'syslogd' 'tty1' 'tty2' 'tty3' 'tty4' 'tty5' 'tty6')
 sha256sums=(
 3761e90085fa12fd7a9801559ad2688c570996dc7f5c2e508be3cd953a28f050  # auxfscheck
@@ -45,7 +45,7 @@ package() {
   for d in auxfscheck boot early-filesystems filesystems hwclock late-filesystems loginready mdevd mdevd-coldplug modules rcboot recovery rootfscheck rootrw single syslogd tty1 tty2 tty3 tty4 tty5 tty6; do
     install -Dm644 $d /etc/dinit.d/
   done
-  for d in scripts/early-filesystems.sh scripts/filesystems.sh scripts/late-filesystems.sh scripts/modules.sh scripts/rcboot.sh scripts/rootfscheck.sh; do
+  for d in early-filesystems.sh filesystems.sh late-filesystems.sh modules.sh rcboot.sh rootfscheck.sh; do
     install -Dm644 $d /etc/dinit.d/scripts/
   done
   ln -sf /etc/dinit.d/{late-filesystems,modules} /etc/dinit.d/boot.d/
