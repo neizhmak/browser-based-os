@@ -32,7 +32,7 @@ build_task:
 #    - cd skalibs
 #    - su user -c "makepkg -si --noconfirm"
     - cd ../
-    - for i in dwl thorium-browser-bin skalibs mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem base; do
+    - for i in thorium-browser-bin dwl skalibs mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem base; do
         cd "$i"; su user -c "makepkg -s --noconfirm";
         cp *.pkg.tar.zst /repo/;
         repo-add /repo/pkgs.db.tar.gz /repo/"$i"*;
