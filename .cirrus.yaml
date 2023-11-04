@@ -31,7 +31,7 @@ build_task:
 #    - cd skalibs # not work
 #    - su user -c "makepkg -si --noconfirm"
     - cd ../
-    - rm -rf skalibs
+    - rm -rf skalibs-2.13.1.1
     - chmod -R 777 ./
     - for i in ./*; do
         cd "$i";
