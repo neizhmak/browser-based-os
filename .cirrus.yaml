@@ -10,38 +10,37 @@ build_task:
     - pacman-key --init
     - pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
     - pacman-key --lsign-key F3B607488DB35A47
-    - pacman -Suy  --noconfirm wget git sudo base-devel archiso
+    - pacman -Suy --noconfirm wget git sudo base-devel archiso
     - pacman -U --noconfirm 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-3-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-18-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/pacman-6.0.2-14-x86_64.pkg.tar.zst'
+    - mkdir /repo
+    - useradd user
+    - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+  package_build_script:
     - cd PKGBUILDs
     - git clone https://aur.archlinux.org/thorium-browser-bin.git
     - git clone https://aur.archlinux.org/dinit.git
     - git clone https://aur.archlinux.org/dwl.git
-    - mkdir /repo
-    - chmod -R 777 {../,/repo}
-    - cp -f ../pacman.conf /etc/
-    - useradd user
-    - echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
     - wget https://www.skarnet.org/software/skalibs/skalibs-2.13.1.1.tar.gz
     - tar xvzf skalibs-2.13.1.1.tar.gz
     - cd skalibs-2.13.1.1
     - ./configure --prefix=/usr --datadir=/etc
     - make
     - make install
-#    - cd skalibs
+#    - cd skalibs # not work
 #    - su user -c "makepkg -si --noconfirm"
-    - cd ../
-    - for i in thorium-browser-bin dwl skalibs mdevd mdev-like-a-boss libudev-zero dinit bbo-dinit-services bbo-filesystem; do
-        cd "$i"; su user -c "makepkg -s --noconfirm";
+    - for i in /*; do
+        cd ../"$i"; su user -c "makepkg -s --noconfirm";
         cp *.pkg.tar.zst /repo/;
-        repo-add /repo/pkgs.db.tar.gz /repo/"$i"*;
-        pacman -Sy;
-        cd ../; done
-    - ls /repo/
-    - cd ../
+      done
+    - repo-add /repo/pkgs.db.tar.gz /repo/*.pkg.tar.zst
+    - cp -f ../pacman.conf /etc/
+    - pacman -Sy
+  distribution_build_script:
     - cp -r /usr/share/archiso/configs/baseline/ ./
-    - cp -f {packages.x86_64,pacman.conf} baseline/
+    - cp -f {packages.x86_64,pacman.conf} ./baseline/
+    - ls ./baseline/
     - mkarchiso -v ./baseline/profiledef.sh
     - ls work/
   jhalfs_artifacts:
