@@ -31,7 +31,7 @@ build_task:
 #    - cd skalibs # not work
 #    - su user -c "makepkg -si --noconfirm"
     - for i in ../*; do
-        cd ../"$i"; su user -c "makepkg -s --noconfirm";
+        cd "$i"; su user -c "makepkg -s --noconfirm";
         cp *.pkg.tar.zst /repo/;
       done
     - repo-add /repo/pkgs.db.tar.gz /repo/*.pkg.tar.zst
