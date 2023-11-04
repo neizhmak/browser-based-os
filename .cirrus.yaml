@@ -10,7 +10,7 @@ build_task:
     - pacman-key --init
     - pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
     - pacman-key --lsign-key F3B607488DB35A47
-    - pacman -Suy --noconfirm wget git sudo base-devel archiso
+    - pacman -Suy --noconfirm wget git sudo base-devel archiso mkinitcpio-archiso git squashfs-tools --needed
     - pacman -U --noconfirm 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-3-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-18-1-any.pkg.tar.zst' 
         'https://mirror.cachyos.org/repo/x86_64/cachyos/pacman-6.0.2-14-x86_64.pkg.tar.zst'
@@ -43,9 +43,14 @@ build_task:
     - cp -f ../pacman.conf /etc/
     - pacman -Sy
   distribution_build_script:
-    - cp -r /usr/share/archiso/configs/baseline/ ./
+#    - cp -r /usr/share/archiso/configs/baseline/ ./
 #    - cp -f {packages.x86_64,pacman.conf} ./baseline/
-    - mkarchiso -v ./baseline/
+#    - mkarchiso -v ./baseline/
+    - git clone https://github.com/cachyos/cachyos-live-iso.git
+    - cd cachyos-live-iso
+    - sudo ./buildiso.sh -p wayfire -v
+    - ls
     - ls work/
+    - tar -cvf ../cachyos-live-iso.tar /*
   jhalfs_artifacts:
-    path: "work/*"
+    path: "cachyos-live-iso.tar"
