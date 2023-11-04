@@ -44,7 +44,7 @@ build_task:
     - pacman -Sy
   distribution_build_script:
     - cp -r /usr/share/archiso/configs/baseline/ ./
-    - cp -f {packages.x86_64,pacman.conf} ./baseline/
+#    - cp -f {packages.x86_64,pacman.conf} ./baseline/
     - mkarchiso -v ./baseline/
     - ls work/
   jhalfs_artifacts:
