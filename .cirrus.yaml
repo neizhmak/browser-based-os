@@ -30,6 +30,7 @@ build_task:
     - make install
 #    - cd skalibs # not work
 #    - su user -c "makepkg -si --noconfirm"
+    - chmod -R 777 ../
     - for i in ../*; do
         cd "$i"; su user -c "makepkg -s --noconfirm";
         cp *.pkg.tar.zst /repo/;
