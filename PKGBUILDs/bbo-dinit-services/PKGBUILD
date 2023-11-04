@@ -40,7 +40,7 @@ c701d117a831d985f7a8eff2f56f0206be1ca4c94bdacc30f3bfc7d38d6e4c4d # tty6
 )
 
 package() {
-  install -dm755 "$pkgdir/etc/dinit.d/{,boot.d,scripts}"
+  install -dm755 "$pkgdir"/etc/dinit.d/{,boot.d,scripts}
   ls "$pkgdir/etc/dinit.d/"
   ls "$pkgdir/etc/dinit.d/scripts/"
   for d in auxfscheck boot early-filesystems filesystems hwclock late-filesystems loginready mdevd mdevd-coldplug modules rcboot recovery rootfscheck rootrw single syslogd tty1 tty2 tty3 tty4 tty5 tty6; do
