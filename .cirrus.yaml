@@ -1,7 +1,7 @@
 container:
   image: archlinux:base-devel
-  cpu: 1
-  memory: 1G
+  cpu: 2
+  memory: 2G
 
 busybox_task:
   preparation_script:
