@@ -7,7 +7,7 @@ env:
 
 busybox_task:
   preparation_script:
-    - pacman -Suy --noconfirm base-devel emscripten kernel-headers-musl cmake wget git
+    - pacman -Suy --noconfirm base-devel emscripten kernel-headers-musl linux-headers cmake wget git
     - ln -sf /usr/lib/emscripten/emcc /usr/lib/emscripten/emgcc
     - ln -sf /usr/lib/emscripten/emcc.py /usr/lib/emscripten/emgcc.py
     - ln -sf usr/lib/modules/6.5.9-arch2-1/build/include/uapi/linux/kd.h /usr/lib/include/linux/
