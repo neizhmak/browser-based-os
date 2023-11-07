@@ -17,6 +17,7 @@ busybox_task:
   build_script:
     - source /etc/profile.d/emscripten.sh
     - cd busybox-1.36.1
+    - git submodule update --init
     - emmake make CC=emcc CFLAGS="-o busybox.wasm"
 #    - emcc *.c -o hello.wasm
     - tar cf ../busybox-1.36.1.tar ./*
