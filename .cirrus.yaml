@@ -10,7 +10,9 @@ busybox_task:
     - pacman -Suy --noconfirm base-devel emscripten kernel-headers-musl linux-headers cmake wget git
     - ln -sf /usr/lib/emscripten/emcc /usr/lib/emscripten/emgcc
     - ln -sf /usr/lib/emscripten/emcc.py /usr/lib/emscripten/emgcc.py
-    - ln -sf usr/lib/modules/6.5.9-arch2-1/build/include/uapi/linux/kd.h /usr/lib/include/linux/
+    - ls usr/lib/
+    - mkdir -r usr/lib/include/linux
+    - ln -sf /usr/lib/modules/6.5.9-arch2-1/build/include/uapi/linux/kd.h /usr/lib/include/linux/
     - ln -sf /usr/bin/core_perl/pod2* /usr/bin/
     - wget https://www.busybox.net/downloads/busybox-1.36.1.tar.bz2
     - tar xjf busybox-1.36.1.tar.bz2
