@@ -15,8 +15,9 @@ busybox_task:
     - tar xjf busybox-1.36.1.tar.bz2
     - cd busybox-1.36.1
     - cp ../config .config
-    - ln -sf /usr/include/linux ./{,console-tools}
+    - ln -sf /usr/include/linux ./console-tools/
     - sed -i 's@<linux/kd.h>@"linux/kd.h"@g' console-tools/kbd_mode.c
+    - sed -i 's@<linux/types.h>@"linux/types.h"@g' console-tools/linux/kd.h
   build_script:
     - source /etc/profile.d/emscripten.sh
     - cd busybox-1.36.1
