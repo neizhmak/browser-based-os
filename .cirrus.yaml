@@ -19,8 +19,7 @@ busybox_task:
   build_script:
     - source /etc/profile.d/emscripten.sh
     - cd busybox-1.36.1
-    - emmake make CC=musl-gcc SKIP_STRIP=y
-    - emmake make all # CC=emcc SKIP_STRIP=y CFLAGS="-o busybox.wasm" # -I "/usr/lib/modules/6.5.9-arch2-1/build/include/uapi/" # 
+    - emmake make SKIP_STRIP=y # CC=emcc SKIP_STRIP=y CFLAGS="-o busybox.wasm" # -I "/usr/lib/modules/6.5.9-arch2-1/build/include/uapi/" # 
 #    - emcc *.c -o hello.wasm
     - tar cf ../busybox-1.36.1.tar ./*
   wasm_artifacts:
